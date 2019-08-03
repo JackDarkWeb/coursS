@@ -3,33 +3,18 @@
 namespace App\Controller;
 
 
+
+use http\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class LuckyController extends Controller
 {
-
-
-    function lucky_numbers($count = null){
-
-        $numbers = array();
-        $len = '';
-
-        $count == null ? $len = 1 : $len = $count ;
-        for($i=0; $i < $len; $i++){
-
-            $numbers[] = random_int(0, 100);
-        }
-        $numberslist = implode(', ', $numbers);
-
-        return $numberslist;
-    }
-
-    /**
-     * @Route("/lucky/number", name="lucky")
 
     public function lucky_numbers($len = null){
         $count = '';
@@ -73,33 +58,6 @@ class LuckyController extends Controller
         ]);
     }
 
-
-    //####### Return en JSON ##########
-
-    /**
-     * @Route("/lucky/number/json")
-     */
-    public function apiNumberAction(){
-
-        $data = ['lucky' => $this->lucky_numbers()];
-
-        //return new Response(json_encode($data));
-        return new JsonResponse($data);
-    }
-
-    /**
-     * @Route("/lucky/number/{count}")
-     * @param $count
-     * @return Response
-     */
-    public function numbersAction($count){
-        $nbr = $this->lucky_numbers($count);
-        return new Response("<html><body> <h1>Lucky numbers : <sapn style='color:blue'>$nbr</sapn></h1></body></html>");
-    }
-
-    // ######Rendering a Template (with the Service Container)#####################
-
-
     // ##########E# Creating a JSON Response #########
 
     /**
@@ -139,6 +97,12 @@ class LuckyController extends Controller
      * @Route("/user/{id}")
      */
     public function show($id){
+
+        if(count($this->data()) < $id){
+
+            throw $this->createNotFoundException("Error 404 the page not found!");
+        }
+
         $user = $this->data($id);
         $user = (object)$user;
         return new Response("<html><body><table><thead><tr><th>Name</th><th>Age</th></tr></thead><tbody><tr><td>$user->name</td><td>$user->age</td></tr></tbody></table></body></html>");
@@ -161,4 +125,60 @@ class LuckyController extends Controller
             "lucky" => $numbers
         ]);
     }
+
+    //#############  The Request object as a Controller Argument ###########
+
+    /**
+     * @param Request $request
+     * @Route("get/request")
+     */
+    public function getRequestion(Request  $request){
+
+        $page = $request->query->get("page", 5);
+        dd($page);
+    }
+
+    // ###################   Managing the Session #########
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/session/get/{name}")
+     */
+    public function managingSession(Request $request, $name){
+
+        $session = $request->getSession();
+
+        $session->set('foo', 'bar');
+        $foo = $session->get("foo");
+        setcookie("test", "Jack", time() + 200);
+
+        //$ip = $request->getClientIp();
+
+        if(!isset($_COOKIE['name'])){
+
+            setcookie('name', $name, time() + 50);
+
+            return new Response("Bienvenu $name");
+
+        }else{
+
+            $get = $_COOKIE['name'];
+            return new Response("Vous avez deja visite ce site $get");
+        }
+    }
+
+    // ###### Flash Messages #####
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/message/flash")
+     */
+    public function messageFlash(Request $request){
+
+        $this->addFlash("info", "Tout est accompli au nom de Jesus");
+        return $this->render("flashmsg.html.twig");
+    }
+
 }
