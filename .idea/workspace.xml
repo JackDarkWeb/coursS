@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8270befe-3fd4-4855-b399-54daaa09b42c" name="Default Changelist" comment="">
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.test" beforeDir="false" afterPath="$PROJECT_DIR$/.env.test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/coursS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/coursS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+=======
       <change afterPath="$PROJECT_DIR$/templates/lucky/lucky.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/LuckyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LuckyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/lucky/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lucky/index.html.twig" afterDir="false" />
+>>>>>>> cdde742dc79c7005e33cfef3c4fc1a06ab974c9f
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +29,7 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
-      <phar pharPath="$PROJECT_DIR$/composer.phar" interpreterId="54ea6bb5-5eae-40c5-84bc-a8a224109200" />
+      <phar pharPath="$PROJECT_DIR$/composer_2.phar" interpreterId="d2980861-c8b9-4863-8423-a47013dc812e" />
     </execution>
   </component>
   <component name="Git.Settings">
@@ -132,12 +145,17 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1OcuOGH5Knilg6GDF1wmUryzXkt" />
+<<<<<<< HEAD
+  <component name="ProjectLevelVcsManager">
+=======
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+>>>>>>> cdde742dc79c7005e33cfef3c4fc1a06ab974c9f
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -162,9 +180,17 @@
       <option name="presentableId" value="Default" />
       <updated>1564289171437</updated>
       <workItem from="1564289179039" duration="1334000" />
+<<<<<<< HEAD
+      <workItem from="1564713024928" duration="4603000" />
+=======
       <workItem from="1564294634262" duration="5576000" />
       <workItem from="1564319128110" duration="29000" />
+<<<<<<< HEAD
       <workItem from="1564687884208" duration="6587000" />
+=======
+      <workItem from="1564687884208" duration="6465000" />
+>>>>>>> cdde742dc79c7005e33cfef3c4fc1a06ab974c9f
+>>>>>>> 2a4d504efb2172e1d05e38c8884471a6aa9fcf41
     </task>
     <servers />
   </component>
@@ -176,9 +202,13 @@
       <map>
         <entry key="MAIN">
           <value>
+<<<<<<< HEAD
+            <State />
+=======
             <State>
               <option name="COLUMN_ORDER" />
             </State>
+>>>>>>> cdde742dc79c7005e33cfef3c4fc1a06ab974c9f
           </value>
         </entry>
       </map>
