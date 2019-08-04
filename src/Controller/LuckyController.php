@@ -4,6 +4,8 @@ namespace App\Controller;
 
 
 
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 use http\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -176,9 +178,117 @@ class LuckyController extends Controller
      * @Route("/message/flash")
      */
     public function messageFlash(Request $request){
-
+        $file = $request->files->get("file");
+        dump($file);
         $this->addFlash("info", "Tout est accompli au nom de Jesus");
         return $this->render("flashmsg.html.twig");
+    }
+
+    //############## The Request and Response Object ############
+    public function indexAction(Request $request){
+        $request->isXmlHttpRequest(); // is it an Ajax request
+
+        $request->getPreferredLanguage(array("fr", "en"));
+
+        //récupérer les variables GET et POST respectivement
+        $request->query->get("page");
+        $request->request->get("page");
+
+        // retrieve SERVER variables
+        $request->server->get('HTTP_HOST');
+
+        // retrieves an instance of UploadedFile identified by foo
+        $request->files->get('foo');
+
+        // retrieve a COOKIE value
+        $request->cookies->get('PHPSESSID');
+    }
+
+    // ############## Persisting Objects to the Database #######################
+
+    /**
+     * @return Response
+     * @Route("/product/create")
+     */
+    public function createAction(){
+        $product = new Product();
+        $product->setName('Keyboard');
+        $product->setPrice(19.99);
+        $product->setDescription('Ergonomic and stylish');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($product);
+        $em->flush();
+
+        $this->addFlash("create", "The product " .$product->getId(). " has been created");
+        return $this->render("create.html.twig");
+    }
+
+    /**
+     * @param $productId
+     * @return Response
+     * @Route("/product/{productId}")
+     */
+    public function showAction(ProductRepository $repository, $productId){
+
+        /*$product = $this->getDoctrine()
+            ->getRepository('AppBundle:Product')
+            ->find($productId);
+*/
+        $product = $repository->find($productId);
+
+        /*
+        // dynamic method names to find a single product based on a column value
+        $product = $repository->findOneById($productId);
+
+        $product = $repository->findOneByName('Keyboard');
+
+       // dynamic method names to find a group of products based on a column value
+        $products = $repository->findByPrice(19.99);
+        */
+
+        if(!$product){
+            $this->addFlash('notice','No product found for id '.$productId);
+            return $this->redirectToRoute("products");
+        }
+
+        return $this->render("show.html.twig",[
+            'product' => $product,
+        ]);
+    }
+
+    /**
+     * @param ProductRepository $repository
+     * @return Response
+     * @Route("/products", name="products")
+     */
+    public function index(ProductRepository $repository){
+
+        $products = $repository->findAll();
+        return $this->render("index.html.twig",[
+            'products' => $products,
+        ]);
+    }
+
+    /**
+     * @param ProductRepository $repository
+     * @param $productId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/update/{productId}")
+     */
+    public function updateAction(ProductRepository $repository, $productId){
+        $em = $this->getDoctrine()->getManager();
+        $update = $em->$repository->find($productId);
+
+        $update->setPrice(12);
+        $em->flush();
+
+        if(!$update){
+            $this->addFlash('notice','No product not found for id '.$productId);
+            return $this->redirectToRoute("products");
+        }
+        $this->addFlash('update', 'The product '.$productId. ' has been updated');
+        return $this->redirectToRoute('products');
     }
 
 }
